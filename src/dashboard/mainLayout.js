@@ -7,8 +7,6 @@ import {
   VideoCameraOutlined
 } from "@ant-design/icons";
 import { Button, Layout, Menu } from "antd";
-import SearchQuery from "../components/SearchQuery";
-import CustomerSearchSection from "../components/CustomerSearchSection";
 import OrderSection from "../components/OrderSection";
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
@@ -62,7 +60,8 @@ const MainLayout = () => {
           style={{
             margin: "0px 16px",
             paddingTop: "0px",
-            padding: "20px"
+            padding: "20px",
+            minHeight:"95vh"
           }}
         >
           <OrderSection />
