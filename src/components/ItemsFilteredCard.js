@@ -5,37 +5,22 @@ import ItemCard from "./ItemCard";
 import ProductContext from "../context/ProductContext";
 
 const limit = 6;
-const AllItems = (props) => {
+const FilteredByCategory = (props) => {
   // const [products, setProducts] = useState([]);
   const [total, setTotal] = useState();
   const [skip, setSkip] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { products, setProducts, setCart, cart, setProductTitles } =
-    useContext(ProductContext);
+  const { products, setProducts, setCart, cart } = useContext(ProductContext);
 
   const FetchProductItems = () => {
-    let query = props.category
-      ? `https://dummyjson.com/products/category/${props.category}?limit=${limit}&skip=${skip}`
-      : `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
-    fetch(query)
+    fetch(
+      `https://dummyjson.com/products/category/${props.category}?limit=${limit}&skip=${skip}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setProducts(data?.products);
         setTotal(data?.total);
       });
-  };
-
-  const ExtractProductTitle = () => {
-    let productTitles = [];
-    fetch(`https://dummyjson.com/products`)
-      .then((res) => res.json())
-      .then((data) => {
-        data?.products.forEach((product) => {
-          productTitles.push({ value: product.title });
-        });
-      });
-
-    setProductTitles(productTitles);
   };
 
   const handlePageChange = (page) => {
@@ -48,7 +33,6 @@ const AllItems = (props) => {
 
   useEffect(() => {
     FetchProductItems();
-    ExtractProductTitle();
   }, [skip]);
   const AddProductToCart = (product) => {
     let productAlreadyInCart = cart.find((item) => item.id === product.id);
@@ -107,6 +91,6 @@ const AllItems = (props) => {
   );
 };
 
-export default AllItems;
+export default FilteredByCategory;
 
 // "https://media.istockphoto.com/id/520410807/photo/cheeseburger.jpg?s=612x612&w=0&k=20&c=fG_OrCzR5HkJGI8RXBk76NwxxTasMb1qpTVlEM0oyg4="
