@@ -65,8 +65,7 @@ img {
 }
 
 .ant-layout-header,
-.ant-layout-sider-children,
-.ant-btn-icon {
+.ant-layout-sider-children {
   background-color: #ffff !important;
   color: #282c34 !important;
 }
@@ -85,6 +84,10 @@ img {
   border-inline-end: none !important;
 }
 
-.ant-layout-header ul{
+.ant-layout-header ul {
   background-color: #fff;
+}
+
+table, th, tr{
+  text-align: center !important;
 }
