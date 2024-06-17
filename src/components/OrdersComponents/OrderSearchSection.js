@@ -7,7 +7,7 @@ import ProductContext from "../../context/ProductContextAPI/ProductContext";
 const { Title } = Typography;
 
 const OrderSearchSection = () => {
-  const { productTitles, setCategory } = useContext(ProductContext);
+  const { productTitles, setCategory, category } = useContext(ProductContext);
   const items = [
     {
       key: "all",
@@ -114,7 +114,7 @@ const OrderSearchSection = () => {
         placeholder="Search for Foods, drinks, etc..."
         options={productTitles}
       />
-      <Tabs items={items} onChange={setCategory} />
+      <Tabs items={items} defaultActiveKey={category} onChange={setCategory} />
     </div>
   );
 };

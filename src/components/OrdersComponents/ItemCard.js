@@ -2,19 +2,15 @@ import React from "react";
 import { Button, Card } from "antd";
 const ItemCard = (props) => {
   const product = {
-    title: props.title,
-    price: props.price,
-    image: props.image,
-    id: props.id,
-    qty: 1,
-    total: props.price * 1
+    ...props,
+    total: props.price * 1,
   };
   return (
     <Card
       style={{ display: "flex", flexDirection: "column", borderRadius: "20px" }}
       cover={
         <img
-          src={props.image}
+          src={props.thumbnail}
           alt=""
           style={{
             width: "90%",

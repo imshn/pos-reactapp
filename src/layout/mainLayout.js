@@ -144,8 +144,9 @@ const MainLayout = () => {
             items={[
               {
                 key: "1",
-                icon: renderNotification()
+                icon: renderNotification(),
                 // label: "Dashboard"
+                onClick: () => navigate("/saved-cart")
               },
               {
                 key: "2",

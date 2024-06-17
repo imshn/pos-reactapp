@@ -6,6 +6,7 @@ import MainLayout from "./layout/mainLayout";
 // import Dashboard from "./components/DashboardComponents/Dashboard";
 import OrderSection from "./components/OrdersComponents/OrderSection";
 import CustomerList from "./components/CustomerComponents/CustomerList";
+import SavedCartComponent from "./components/SavedCartComponents/SavedCartComponent";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ const router = createBrowserRouter([
             element: <h1>Stock Report</h1>
           }
         ]
+      },
+      {
+        path: "/saved-cart",
+        element: <SavedCartComponent />
       }
     ]
   }

@@ -79,10 +79,9 @@ const AllItems = () => {
           <Col key={index} span={8}>
             <ItemCard
               key={index}
-              image={product.thumbnail}
-              title={product.title}
-              price={product.price}
-              id={product.id}
+              {...product}
+              qty={1}
+              description={null}
               onClick={(response) => AddProductToCart(response)}
             />
           </Col>
