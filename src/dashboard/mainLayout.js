@@ -4,7 +4,8 @@ import {
   LayoutOutlined,
   PieChartOutlined,
   InboxOutlined,
-  TeamOutlined
+  TeamOutlined,
+  BarChartOutlined
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
 import OrderSection from "../components/OrderSection";
@@ -57,21 +58,44 @@ const MainLayout = () => {
                 {
                   key: "31",
                   label: "Manage Customers"
-                },
+                }
               ]
             },
             {
               key: "4",
               icon: <InboxOutlined />,
-              label: "Product", 
-              children:[
+              label: "Product",
+              children: [
                 {
                   key: "41",
-                  label: "Manage Products",
+                  label: "Manage Products"
                 },
                 {
                   key: "42",
-                  label: "Manage Categories",
+                  label: "Manage Categories"
+                }
+              ]
+            },
+            {
+              key: "5",
+              icon: <BarChartOutlined />,
+              label: "Reports",
+              children: [
+                {
+                  key: "51",
+                  label: "Today's Sales"
+                },
+                {
+                  key: "52",
+                  label: "Sales Reports"
+                },
+                {
+                  key: "53",
+                  label: "Sales Returns"
+                },
+                {
+                  key: "54",
+                  label: "Stock Reports"
                 }
               ]
             }
