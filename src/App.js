@@ -1,11 +1,84 @@
 import "./App.css";
 import ProductContextProvider from "./context/ProductContextProvider";
 import MainLayout from "./dashboard/mainLayout";
+import OrderSection from "./components/OrderSection";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <h1>404</h1>,
+    children: [
+      {
+        path: "orders",
+        element: <OrderSection />,
+        children: [
+          {
+            path: "create",
+            element: <h1>Create Order</h1>
+          }
+        ]
+      },
+      {
+        path: "/customers",
+        element: <h1>Customers</h1>,
+        children: [
+          {
+            path: "add",
+            element: <h1>Add Customer</h1>
+          }
+        ]
+      },
+      {
+        path: "/products",
+        element: <h1>Products</h1>,
+        children: [
+          {
+            path: "add",
+            element: <h1>Add Product</h1>
+          }
+        ]
+      },
+      {
+        path: "/categories",
+        element: <h1>Categories</h1>,
+        children: [
+          {
+            path: "add",
+            element: <h1>Add Category</h1>
+          }
+        ]
+      },
+      {
+        path: "/reports",
+        children: [
+          {
+            path: "today",
+            element: <h1>Todays Report</h1>
+          },
+          {
+            path: "sales-reports",
+            element: <h1>Sales Report</h1>
+          },
+          {
+            path: "sales-returns",
+            element: <h1>Sales Returns</h1>
+          },
+          {
+            path: "stock-reports",
+            element: <h1>Stock Report</h1>
+          }
+        ]
+      }
+    ]
+  }
+]);
 
 function App() {
   return (
     <ProductContextProvider>
-      <MainLayout />
+      <RouterProvider router={router} />
     </ProductContextProvider>
   );
 }

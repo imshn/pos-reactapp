@@ -105,7 +105,6 @@ const OrderSearchSection = () => {
       <Breadcrumb>
         <Breadcrumb.Item>Home</Breadcrumb.Item>
         <Breadcrumb.Item>Orders</Breadcrumb.Item>
-        <Breadcrumb.Item>Manage Orders</Breadcrumb.Item>
         <Breadcrumb.Item>Create</Breadcrumb.Item>
       </Breadcrumb>
       <Title>

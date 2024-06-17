@@ -8,16 +8,18 @@ import {
   BarChartOutlined
 } from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-import OrderSection from "../components/OrderSection";
+// import OrderSection from "../components/OrderSection";
+import { Outlet, useNavigate } from "react-router-dom";
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate();
   return (
     <Layout hasSider>
       <Sider
         style={{
           overflow: "auto",
-          height: "100vh",
+          minHeight: "100vh",
           position: "fixed",
           left: 0,
           top: 0,
@@ -32,34 +34,25 @@ const MainLayout = () => {
         </div>
         <Menu
           mode="inline"
-          defaultSelectedKeys={["2"]}
+          defaultSelectedKeys={["1"]}
           items={[
             {
               key: "1",
               icon: <PieChartOutlined />,
-              label: "Dashboard"
+              label: "Dashboard",
+              onClick: () => navigate("/")
             },
             {
               key: "2",
               icon: <LayoutOutlined />,
               label: "Orders",
-              children: [
-                {
-                  key: "21",
-                  label: "Manage Orders"
-                }
-              ]
+              onClick: () => navigate("/orders")
             },
             {
               key: "3",
               icon: <TeamOutlined />,
-              label: "Customer",
-              children: [
-                {
-                  key: "31",
-                  label: "Manage Customers"
-                }
-              ]
+              label: "Customers",
+              onClick: () => navigate("/customers")
             },
             {
               key: "4",
@@ -68,11 +61,13 @@ const MainLayout = () => {
               children: [
                 {
                   key: "41",
-                  label: "Manage Products"
+                  label: "Manage Products",
+                  onClick: () => navigate("/products")
                 },
                 {
                   key: "42",
-                  label: "Manage Categories"
+                  label: "Manage Categories",
+                  onClick: () => navigate("/categories")
                 }
               ]
             },
@@ -83,19 +78,23 @@ const MainLayout = () => {
               children: [
                 {
                   key: "51",
-                  label: "Today's Sales"
+                  label: "Today's Sales Report",
+                  onClick: () => navigate("/reports/today")
                 },
                 {
                   key: "52",
-                  label: "Sales Reports"
+                  label: "Sales Reports",
+                  onClick: () => navigate("reports/sales-reports")
                 },
                 {
                   key: "53",
-                  label: "Sales Returns"
+                  label: "Sales Returns",
+                  onClick: () => navigate("/reports/sales-returns")
                 },
                 {
                   key: "54",
-                  label: "Stock Reports"
+                  label: "Stock Reports",
+                  onClick: () => navigate("/reports/stock-reports")
                 }
               ]
             }
@@ -149,7 +148,7 @@ const MainLayout = () => {
             minHeight: "95vh"
           }}
         >
-          <OrderSection />
+          <Outlet />
         </Content>
       </Layout>
     </Layout>
