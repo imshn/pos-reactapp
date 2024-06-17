@@ -66,15 +66,18 @@ const CartList = () => {
         "No items found inside the cart!"
       );
     }
-    
+
     if (cart.length > 0) {
       cart.forEach((item) => {
         total += parseFloat(item.price) * item.qty;
       });
+
       setSaveCartList([
         ...saveCartList,
         {
+          receipt: Math.ceil(Math.random() * 10000000000),
           total: total.toFixed(2),
+          date: new Date().toUTCString(),
           item: cart
         }
       ]);

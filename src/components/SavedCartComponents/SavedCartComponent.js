@@ -7,48 +7,113 @@ const SavedCartComponent = () => {
   const { saveCartList } = useContext(ProductContext);
   const columns = [
     {
-      title: "Items",
-      dataIndex: "title",
-      key: "title",
+      title: "Receipt No",
+      dataIndex: "receipt",
+      key: "receipt",
       render: (text) => (
         <Text style={{ display: "block", width: "100%" }}>{text}</Text>
       ),
       ellipsis: true
     },
     {
-      title: "Qty",
-      dataIndex: "qty",
-      key: "qty",
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
       render: (text, record) => <Text>{text}</Text>
     },
     {
-      title: "Price",
-      dataIndex: "price",
-      key: "price",
-      render: (text, record) => (
-        <strong>${(parseFloat(text) * record.qty).toFixed(2)}</strong>
-      )
+      title: "Total Amount",
+      dataIndex: "total",
+      key: "toal",
+      render: (text, record) => <strong>${text}</strong>
     }
   ];
-  console.log(saveCartList, "saved");
-  const dataSource = [];
-  const trimSaveCartList = () => {
+  //   const columns = [
+  //     {
+  //       title: "Items",
+  //       dataIndex: "title",
+  //       key: "title",
+  //       render: (text) => (
+  //         <Text style={{ display: "block", width: "100%" }}>{text}</Text>
+  //       ),
+  //       ellipsis: true
+  //     },
+  //     {
+  //       title: "Qty",
+  //       dataIndex: "qty",
+  //       key: "qty",
+  //       render: (text, record) => <Text>{text}</Text>
+  //     },
+  //     {
+  //       title: "Price",
+  //       dataIndex: "price",
+  //       key: "price",
+  //       render: (text, record) => (
+  //         <strong>${(parseFloat(text) * record.qty).toFixed(2)}</strong>
+  //       )
+  //     }
+  //   ];
+  const itemDetails = [];
+  const itemParentList = () => {
     saveCartList.forEach((item) => {
-      dataSource.push(...item.item);
-      console.log([...item.item], "38");
+      itemDetails.push(item);
     });
-    return dataSource;
+    return itemDetails;
   };
-  //   console.log(dataSource)
+  const expandedRowRender = () => {
+    const columns = [
+      {
+        title: "Items",
+        dataIndex: "title",
+        key: "title",
+        render: (text) => (
+          <Text style={{ display: "block", width: "100%" }}>{text}</Text>
+        ),
+        ellipsis: true
+      },
+      {
+        title: "Qty",
+        dataIndex: "qty",
+        key: "qty",
+        render: (text, record) => <Text>{text}</Text>
+      },
+      {
+        title: "Price",
+        dataIndex: "price",
+        key: "price",
+        render: (text, record) => (
+          <strong>${(parseFloat(text) * record.qty).toFixed(2)}</strong>
+        )
+      }
+    ];
+    const data = [];
+
+    const trimSaveCartList = () => {
+      itemDetails.forEach((item) => {
+        data.push(...item.item);
+      });
+      return data;
+    };
+    return (
+      <Table
+        columns={columns}
+        dataSource={trimSaveCartList()}
+        pagination={false}
+      />
+    );
+  };
+  console.log(saveCartList);
   return (
     <div>
       <Title>Saved Carts</Title>
       <Table
-        dataSource={trimSaveCartList()}
+        dataSource={itemParentList()}
         style={{ border: "0 !important", width: "100%" }}
         size="middle"
         columns={columns}
-        // pagination={false}
+        expandable={{
+          expandedRowRender
+        }}
         pagination={{
           pageSize: 10
         }}
