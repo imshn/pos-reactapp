@@ -34,7 +34,7 @@ const MainLayout = () => {
         </div>
         <Menu
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["2"]}
           items={[
             // {
             //   key: "1",

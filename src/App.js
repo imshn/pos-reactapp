@@ -2,7 +2,7 @@ import "./App.css";
 import ProductContextProvider from "./context/ProductContextProvider";
 import MainLayout from "./layout/mainLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Dashboard from "./components/DashboardComponents/Dashboard";
+// import Dashboard from "./components/DashboardComponents/Dashboard";
 import OrderSection from "./components/OrdersComponents/OrderSection";
 
 const router = createBrowserRouter([
