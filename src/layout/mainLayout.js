@@ -36,12 +36,12 @@ const MainLayout = () => {
           mode="inline"
           defaultSelectedKeys={["1"]}
           items={[
-            {
-              key: "1",
-              icon: <PieChartOutlined />,
-              label: "Dashboard",
-              onClick: () => navigate("/")
-            },
+            // {
+            //   key: "1",
+            //   icon: <PieChartOutlined />,
+            //   label: "Dashboard",
+            //   onClick: () => navigate("/")
+            // },
             {
               key: "2",
               icon: <LayoutOutlined />,

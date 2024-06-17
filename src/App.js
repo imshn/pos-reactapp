@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Dashboard />
+        element: <OrderSection />
       },
       {
         path: "orders",
