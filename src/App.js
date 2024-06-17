@@ -4,6 +4,7 @@ import MainLayout from "./layout/mainLayout";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import Dashboard from "./components/DashboardComponents/Dashboard";
 import OrderSection from "./components/OrdersComponents/OrderSection";
+import CustomerList from "./components/CustomerComponents/CustomerList";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/customers",
-        element: <h1>Customers</h1>,
+        element: <CustomerList />,
         children: [
           {
             path: "add",
