@@ -2,7 +2,7 @@ import { Button, Card, Divider, Flex, Select, Table, Typography } from "antd";
 import React, { useContext, useState } from "react";
 import CutomerName from "./cutomerName";
 import { DeleteOutlined } from "@ant-design/icons";
-import ProductContext from "../context/ProductContext";
+import ProductContext from "../../context/ProductContext";
 
 const { Text } = Typography;
 

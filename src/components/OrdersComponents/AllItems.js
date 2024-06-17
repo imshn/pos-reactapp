@@ -2,7 +2,7 @@ import { Col, Empty, Flex, Pagination, Row } from "antd";
 import React, { useEffect, useState, useContext } from "react";
 
 import ItemCard from "./ItemCard";
-import ProductContext from "../context/ProductContext";
+import ProductContext from "../../context/ProductContext";
 
 const limit = 6;
 const AllItems = () => {
@@ -15,7 +15,7 @@ const AllItems = () => {
     useContext(ProductContext);
 
   const FetchProductItems = () => {
-    let query = !(category == "all")
+    let query = !(category === "all")
       ? `https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`
       : `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
     fetch(query)
@@ -42,7 +42,7 @@ const AllItems = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
     setSkip((page - 1) * limit);
-    if (page == 1) {
+    if (page === 1) {
       setSkip(0);
     }
   };
@@ -59,10 +59,10 @@ const AllItems = () => {
 
   const itemRender = (_, type, originalElement) => {
     if (type === "prev") {
-      return <a>Previous</a>;
+      return <a href>Previous</a>;
     }
     if (type === "next") {
-      return <a>Next</a>;
+      return <a href>Next</a>;
     }
     return originalElement;
   };

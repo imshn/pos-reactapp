@@ -1,7 +1,7 @@
 import "./App.css";
 import ProductContextProvider from "./context/ProductContextProvider";
 import MainLayout from "./dashboard/mainLayout";
-import OrderSection from "./components/OrderSection";
+import OrderSection from "./components/OrdersComponents/OrderSection";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
