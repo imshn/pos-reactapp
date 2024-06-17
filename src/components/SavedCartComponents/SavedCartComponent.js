@@ -48,8 +48,11 @@ const SavedCartComponent = () => {
         style={{ border: "0 !important", width: "100%" }}
         size="middle"
         columns={columns}
-        pagination={false}
-        scroll={{ y: 250 }}
+        // pagination={false}
+        pagination={{
+          pageSize: 10
+        }}
+        // scroll={{ y: 250 }}
         responsive
       />
     </div>
