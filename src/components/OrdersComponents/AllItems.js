@@ -2,7 +2,7 @@ import { Col, Empty, Flex, Pagination, Row } from "antd";
 import React, { useEffect, useState, useContext } from "react";
 
 import ItemCard from "./ItemCard";
-import ProductContext from "../../context/ProductContext";
+import ProductContext from "../../context/ProductContextAPI/ProductContext";
 
 const limit = 6;
 const AllItems = () => {

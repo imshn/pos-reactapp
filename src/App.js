@@ -1,7 +1,8 @@
 import "./App.css";
-import ProductContextProvider from "./context/ProductContextProvider";
-import MainLayout from "./layout/mainLayout";
+import CustomerContextProvider from "./context/CustomerContextAPI/CustomerContextProvider";
+import ProductContextProvider from "./context/ProductContextAPI/ProductContextProvider";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MainLayout from "./layout/mainLayout";
 // import Dashboard from "./components/DashboardComponents/Dashboard";
 import OrderSection from "./components/OrdersComponents/OrderSection";
 import CustomerList from "./components/CustomerComponents/CustomerList";
@@ -90,9 +91,11 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <ProductContextProvider>
-      <RouterProvider router={router} />
-    </ProductContextProvider>
+    <CustomerContextProvider>
+      <ProductContextProvider>
+        <RouterProvider router={router} />
+      </ProductContextProvider>
+    </CustomerContextProvider>
   );
 }
 
