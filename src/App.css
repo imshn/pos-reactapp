@@ -88,6 +88,39 @@ img {
   background-color: #fff;
 }
 
-table, th, tr{
+table,
+th,
+tr {
   text-align: center !important;
+}
+
+.error-notification {
+  background-color: #ff4d4f !important;
+}
+
+.success-notification {
+  background-color: #198754 !important;
+}
+
+.ant-notification-notice-message {
+  color: #ffff !important;
+  font-weight: bolder;
+}
+
+.ant-notification-notice-description {
+  color: #fff !important;
+}
+
+.ant-notification-notice-close {
+  color: #fff !important;
+}
+
+.ant-notification-notice-with-icon svg {
+  color: #fff !important;
+}
+
+.ant-scroll-number-only{
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }

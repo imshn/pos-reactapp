@@ -15,11 +15,11 @@ const CreateCustomerModal = (props) => {
       onOk={props.handleOk}
       onCancel={props.handleCancel}
       okText="Create"
-      cancelButtonProps={{ danger: true, type: "primary" }}
+      cancelButtonProps={{ danger: true, type: "primary", size: "large" }}
+      okButtonProps={{ size: "large" }}
     >
       <Form
         name="customerForm"
-    
         labelCol={{
           span: 5
         }}
@@ -28,7 +28,7 @@ const CreateCustomerModal = (props) => {
         // }}
         style={{
           maxWidth: 600,
-          margin:20
+          margin: 20
         }}
         initialValues={{
           remember: true

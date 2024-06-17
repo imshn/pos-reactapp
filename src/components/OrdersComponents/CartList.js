@@ -1,4 +1,13 @@
-import { Button, Card, Divider, Flex, Select, Table, Typography } from "antd";
+import {
+  Button,
+  Card,
+  Divider,
+  Flex,
+  Select,
+  Table,
+  Typography,
+  notification
+} from "antd";
 import React, { useContext, useState } from "react";
 import CutomerName from "./cutomerName";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -7,8 +16,18 @@ import ProductContext from "../../context/ProductContextAPI/ProductContext";
 const { Text } = Typography;
 
 const CartList = () => {
-  const { cart, setCart } = useContext(ProductContext);
+  const { cart, setCart, saveCartList, setSaveCartList } =
+    useContext(ProductContext);
   const [discount, setDiscount] = useState("0");
+  const [api, contextHolder] = notification.useNotification();
+
+  const openNotificationWithIcon = (type, title, message) => {
+    api[type]({
+      message: title,
+      description: message,
+      className: `${type}-notification`
+    });
+  };
 
   const increaseQuantity = (id) => {
     let product = cart.find((product) => product.id === id);
@@ -38,6 +57,36 @@ const CartList = () => {
     setCart([...cart]);
   };
 
+  const saveCartItems = () => {
+    let total = 0;
+    if (!(cart.length > 0)) {
+      openNotificationWithIcon(
+        "error",
+        "Failed to Save Cart Items",
+        "No items found inside the cart!"
+      );
+    }
+    
+    if (cart.length > 0) {
+      cart.forEach((item) => {
+        total += parseFloat(item.price) * item.qty;
+      });
+      setSaveCartList([
+        ...saveCartList,
+        {
+          total: total.toFixed(2),
+          item: cart
+        }
+      ]);
+      setCart([]);
+      openNotificationWithIcon(
+        "success",
+        "Success",
+        "Cart items saved successfully!"
+      );
+    }
+  };
+
   const columns = [
     {
       title: "Items",
@@ -46,7 +95,7 @@ const CartList = () => {
       render: (text) => (
         <Text style={{ display: "block", width: "100%" }}>{text}</Text>
       ),
-      ellipsis: true,
+      ellipsis: true
     },
     {
       title: "Qty",
@@ -111,6 +160,7 @@ const CartList = () => {
   };
   return (
     <Card>
+      {contextHolder}
       <CutomerName />
       <Table
         dataSource={cart}
@@ -141,12 +191,15 @@ const CartList = () => {
           <b>
             $
             {discount !== "0"
-              ? (getSubTotalPrice() - (discount / 100) * getSubTotalPrice()).toFixed(2)
+              ? (
+                  getSubTotalPrice() -
+                  (discount / 100) * getSubTotalPrice()
+                ).toFixed(2)
               : getSubTotalPrice()}
           </b>
         </Flex>
         <Flex justify="space-between" gap={10}>
-          <Button size="large" block>
+          <Button size="large" block onClick={() => saveCartItems()}>
             Save
           </Button>
           <Button size="large" block type="primary">

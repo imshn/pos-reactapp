@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   ShoppingCartOutlined,
   LayoutOutlined,
@@ -7,12 +7,26 @@ import {
   TeamOutlined,
   BarChartOutlined
 } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Badge } from "antd";
 // import OrderSection from "../components/OrderSection";
 import { Outlet, useNavigate } from "react-router-dom";
+import ProductContext from "../context/ProductContextAPI/ProductContext";
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const { saveCartList } = useContext(ProductContext);
+
+  const renderNotification = () => {
+    if (saveCartList?.length > 0) {
+      return (
+        <Badge count={saveCartList?.length}>
+          <ShoppingCartOutlined style={{ fontSize: 20 }} />
+        </Badge>
+      );
+    }
+    return <ShoppingCartOutlined style={{ fontSize: 20 }} />;
+  };
+
   const navigate = useNavigate();
   return (
     <Layout hasSider>
@@ -130,7 +144,7 @@ const MainLayout = () => {
             items={[
               {
                 key: "1",
-                icon: <ShoppingCartOutlined style={{ fontSize: "20px" }} />
+                icon: renderNotification()
                 // label: "Dashboard"
               },
               {

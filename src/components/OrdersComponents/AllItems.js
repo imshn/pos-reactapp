@@ -73,7 +73,7 @@ const AllItems = () => {
   }, [skip, category]);
 
   return (
-    <Row gutter={[16, 32]}>
+    <Row gutter={[16, 16]}>
       {products ? (
         products?.map((product, index) => (
           <Col key={index} span={8}>
