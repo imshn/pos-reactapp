@@ -24,7 +24,6 @@ const ItemCard = (props) => {
           }}
         />
       }
-      bordered
       hoverable
     >
       <Card.Meta

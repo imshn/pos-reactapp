@@ -5,17 +5,18 @@ import ItemCard from "./ItemCard";
 import ProductContext from "../context/ProductContext";
 
 const limit = 6;
-const AllItems = (props) => {
+const AllItems = () => {
   // const [products, setProducts] = useState([]);
   const [total, setTotal] = useState();
   const [skip, setSkip] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
-  const { products, setProducts, setCart, cart, setProductTitles } =
+  // const [category, setCategory] = useState(props.category)
+  const { products, setProducts, setCart, cart, setProductTitles, category } =
     useContext(ProductContext);
 
   const FetchProductItems = () => {
-    let query = props.category
-      ? `https://dummyjson.com/products/category/${props.category}?limit=${limit}&skip=${skip}`
+    let query = !(category == "all")
+      ? `https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`
       : `https://dummyjson.com/products?limit=${limit}&skip=${skip}`;
     fetch(query)
       .then((res) => res.json())
@@ -46,10 +47,6 @@ const AllItems = (props) => {
     }
   };
 
-  useEffect(() => {
-    FetchProductItems();
-    ExtractProductTitle();
-  }, [skip]);
   const AddProductToCart = (product) => {
     let productAlreadyInCart = cart.find((item) => item.id === product.id);
     if (!productAlreadyInCart) {
@@ -70,11 +67,16 @@ const AllItems = (props) => {
     return originalElement;
   };
 
+  useEffect(() => {
+    FetchProductItems();
+    ExtractProductTitle();
+  }, [skip, category]);
+
   return (
     <Row gutter={[16, 32]}>
       {products ? (
         products?.map((product, index) => (
-          <Col span={8}>
+          <Col key={index} span={8}>
             <ItemCard
               key={index}
               image={product.thumbnail}

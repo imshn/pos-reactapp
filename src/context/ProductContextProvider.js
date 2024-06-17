@@ -5,6 +5,7 @@ const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [productTitles, setProductTitles] = useState([]);
+  const [category, setCategory] = useState("all");
   return (
     <ProductContext.Provider
       value={{
@@ -13,7 +14,9 @@ const ProductContextProvider = ({ children }) => {
         cart,
         setCart,
         productTitles,
-        setProductTitles
+        setProductTitles,
+        setCategory,
+        category
       }}
     >
       {children}

@@ -1,58 +1,119 @@
 import React, { useState } from "react";
 import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined
+  ShoppingCartOutlined,
+  LayoutOutlined,
+  PieChartOutlined,
+  InboxOutlined,
+  TeamOutlined
 } from "@ant-design/icons";
-import { Button, Layout, Menu } from "antd";
+import { Layout, Menu } from "antd";
 import OrderSection from "../components/OrderSection";
 const { Header, Sider, Content } = Layout;
 const MainLayout = () => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   return (
-    <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
+    <Layout hasSider>
+      <Sider
+        style={{
+          overflow: "auto",
+          height: "100vh",
+          position: "fixed",
+          left: 0,
+          top: 0,
+          bottom: 0
+        }}
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
+      >
+        <div className="demo-logo-vertical">
+          <h1>POS</h1>
+        </div>
         <Menu
-          theme="dark"
           mode="inline"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={["2"]}
           items={[
             {
               key: "1",
-              icon: <UserOutlined />,
-              label: "nav 1"
+              icon: <PieChartOutlined />,
+              label: "Dashboard"
             },
             {
               key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "nav 2"
+              icon: <LayoutOutlined />,
+              label: "Orders",
+              children: [
+                {
+                  key: "21",
+                  label: "Manage Orders"
+                }
+              ]
             },
             {
               key: "3",
-              icon: <UploadOutlined />,
-              label: "nav 3"
+              icon: <TeamOutlined />,
+              label: "Customer",
+              children: [
+                {
+                  key: "31",
+                  label: "Manage Customers"
+                },
+              ]
+            },
+            {
+              key: "4",
+              icon: <InboxOutlined />,
+              label: "Product", 
+              children:[
+                {
+                  key: "41",
+                  label: "Manage Products",
+                },
+                {
+                  key: "42",
+                  label: "Manage Categories",
+                }
+              ]
             }
           ]}
         />
       </Sider>
-      <Layout>
+      <Layout
+        style={{
+          transition: "all .1s linear",
+          marginLeft: collapsed ? 80 : 200
+        }}
+      >
         <Header
           style={{
-            padding: 0
+            position: "sticky",
+            top: 0,
+            zIndex: 1,
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between"
           }}
         >
-          <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
+          <div style={{ width: collapsed ? "88.5%" : "87.2%" }}></div>
+          <Menu
+            mode="horizontal"
+            defaultSelectedKeys={["2"]}
+            items={[
+              {
+                key: "1",
+                icon: <ShoppingCartOutlined style={{ fontSize: "20px" }} />
+                // label: "Dashboard"
+              },
+              {
+                key: "2",
+                // icon: < />,
+                label: "Profile"
+              }
+            ]}
             style={{
-              fontSize: "16px",
-              width: 64,
-              height: 64,
-              color: "#fff"
+              flex: 1,
+              minWidth: 0
             }}
           />
         </Header>
@@ -61,7 +122,7 @@ const MainLayout = () => {
             margin: "0px 16px",
             paddingTop: "0px",
             padding: "20px",
-            minHeight:"95vh"
+            minHeight: "95vh"
           }}
         >
           <OrderSection />

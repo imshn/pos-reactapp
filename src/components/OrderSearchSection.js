@@ -1,116 +1,121 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SearchQuery from "./SearchQuery";
-import { Typography } from "antd";
+import { Breadcrumb, Typography } from "antd";
 import { Tabs } from "antd";
 import AllItems from "./AllItems";
 import ProductContext from "../context/ProductContext";
 const { Title } = Typography;
 
-const items = [
-  {
-    key: "all",
-    label: "ALL",
-    children: <AllItems />
-  }, // [object Object]
-  {
-    key: 0,
-    label: "Beauty",
-    children: <AllItems category={"beauty"} />
-  }, // [object Object]
-  {
-    key: 1,
-    label: "Fragrances",
-    children: <AllItems category={"fragrances"} />
-  }, // [object Object]
-  {
-    key: 2,
-    label: "Furniture",
-    children: <AllItems category={"furniture"} />
-  }, // [object Object]
-  {
-    key: 3,
-    label: "Groceries",
-    children: <AllItems category={"groceries"} />
-  }, // [object Object]
-  {
-    key: 4,
-    label: "Home Decoration",
-    children: <AllItems category={"home-decoration"} />
-  }, // [object Object]
-  {
-    key: 5,
-    label: "Kitchen Accessories",
-    children: <AllItems category={"kitchen-accessories"} />
-  }, // [object Object]
-  {
-    key: 6,
-    label: "Laptops",
-    children: <AllItems category={"laptops"} />
-  }, // [object Object]
-  {
-    key: 7,
-    label: "Men's Shirts",
-    children: <AllItems category={"mens-shirts"} />
-  }, // [object Object]
-  {
-    key: 8,
-    label: "Men's Shoes",
-    children: <AllItems category={"mens-shoes"} />
-  }, // [object Object]
-  {
-    key: 9,
-    label: "Men's Watches",
-    children: <AllItems category={"mens-watches"} />
-  }, // [object Object]
-  {
-    key: 10,
-    label: "Mobile Accessories",
-    children: <AllItems category={"mobile-accessories"} />
-  }, // [object Object]
-  {
-    key: 11,
-    label: "Motorcycle",
-    children: <AllItems category={"motorcycle"} />
-  }, // [object Object]
-  {
-    key: 12,
-    label: "Skin Care",
-    children: <AllItems category={"skin-care"} />
-  }, // [object Object]
-  {
-    key: 13,
-    label: "Smarthphones",
-    children: <AllItems category={"smartphones"} />
-  }, // [object Object]
-  {
-    key: 14,
-    label: "Sports Accessories",
-    children: <AllItems category={"sports-accessories"} />
-  }, // [object Object]
-  {
-    key: 15,
-    label: "Sunglasses",
-    children: <AllItems category={"sunglasses"} />
-  },
-  {
-    key: 16,
-    label: "Tablets",
-    children: <AllItems category={"tablets"} />
-  }
-];
 const OrderSearchSection = () => {
-  const { productTitles } = useContext(ProductContext);
-
+  const { productTitles, setCategory } = useContext(ProductContext);
+  const items = [
+    {
+      key: "all",
+      label: "ALL",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "beauty",
+      label: "Beauty",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "fragrances",
+      label: "Fragrances",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "furniture",
+      label: "Furniture",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "groceries",
+      label: "Groceries",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "home-decoration",
+      label: "Home Decoration",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "kitchen-accessories",
+      label: "Kitchen Accessories",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "laptops",
+      label: "Laptops",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "mens-shirts",
+      label: "Men's Shirts",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "mens-shoes",
+      label: "Men's Shoes",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "mens-watches",
+      label: "Men's Watches",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "mobile-accessories",
+      label: "Mobile Accessories",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "motorcycle",
+      label: "Motorcycle",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "skin-care",
+      label: "Skin Care",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "smartphones",
+      label: "Smarthphones",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "sports-accessories",
+      label: "Sports Accessories",
+      children: <AllItems />
+    }, // [object Object]
+    {
+      key: "sunglasses",
+      label: "Sunglasses",
+      children: <AllItems />
+    },
+    {
+      key: "tablets",
+      label: "Tablets",
+      children: <AllItems />
+    }
+  ];
   return (
     <div>
+    <Breadcrumb>
+      <Breadcrumb.Item>Home</Breadcrumb.Item>
+      <Breadcrumb.Item>Orders</Breadcrumb.Item>
+      <Breadcrumb.Item>Manage Orders</Breadcrumb.Item>
+      <Breadcrumb.Item>Create</Breadcrumb.Item>
+    </Breadcrumb>
       <Title>
-        <b>Select Orders</b>
+        <b>Create Order</b>
       </Title>
       <SearchQuery
         placeholder="Search for Foods, drinks, etc..."
         options={productTitles}
       />
-      <Tabs defaultActiveKey="1" items={items} />
+      <Tabs items={items} onChange={setCategory} />
     </div>
   );
 };

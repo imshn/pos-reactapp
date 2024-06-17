@@ -1,4 +1,4 @@
-import { Button, Card, Flex, Select, Table, Typography } from "antd";
+import { Button, Card, Divider, Flex, Select, Table, Typography } from "antd";
 import React, { useContext, useState } from "react";
 import CutomerName from "./cutomerName";
 import { DeleteOutlined } from "@ant-design/icons";
@@ -46,7 +46,7 @@ const CartList = () => {
       render: (text) => (
         <Text style={{ display: "block", width: "100%" }}>{text}</Text>
       ),
-      ellipsis: true
+      ellipsis: true,
     },
     {
       title: "Qty",
@@ -70,15 +70,17 @@ const CartList = () => {
             +
           </Button>
         </Flex>
-      )
+      ),
+      width: "100px"
     },
     {
       title: "Price",
       dataIndex: "price",
       key: "price",
       render: (text, record) => (
-        <strong>${parseFloat(text) * record.qty}</strong>
-      )
+        <strong>${(parseFloat(text) * record.qty).toFixed(2)}</strong>
+      ),
+      width: "100px"
     },
     {
       title: "",
@@ -96,6 +98,7 @@ const CartList = () => {
           <DeleteOutlined />
         </Button>
       )
+      // width:0px"
     }
   ];
 
@@ -104,54 +107,53 @@ const CartList = () => {
     cart.forEach((item) => {
       total += parseFloat(item.price) * item.qty;
     });
-    return Math.ceil(total).toFixed(2);
+    return total.toFixed(2);
   };
   return (
-    <Card style={{ position: "relative" }}>
-      <Flex justify="space-between" vertical>
-        <CutomerName />
-        <Table
-          dataSource={cart}
-          style={{ border: "0 !important", width: "100%" }}
-          // size="middle"
-          columns={columns}
-          pagination={false}
-          scroll={{ y: 250 }}
-          // responsive
-        />
+    <Card>
+      <CutomerName />
+      <Table
+        dataSource={cart}
+        style={{ border: "0 !important", width: "100%" }}
+        size="small"
+        columns={columns}
+        pagination={false}
+        scroll={{ y: 250 }}
 
-        <Card style={{ background: "#eee", marginTop: "20%" }}>
-          <Flex justify="space-between">
-            <Text strong>Sub Total</Text>
-            <Text strong>${getSubTotalPrice()}</Text>
-          </Flex>
-          <Flex justify="space-between" style={{ marginTop: 5 }}>
-            <Text strong>Discount</Text>
-            <Select value={discount} onChange={setDiscount}>
-              <Select.Option value="0">NA</Select.Option>
-              <Select.Option value="15">15%</Select.Option>
-            </Select>
-          </Flex>
+        // responsive
+      />
 
-          <Flex justify="space-between" style={{ margin: "20px 0" }}>
-            <b>Total Payment</b>
-            <b>
-              $
-              {discount !== "0"
-                ? getSubTotalPrice() - (discount / 100) * getSubTotalPrice()
-                : getSubTotalPrice()}
-            </b>
-          </Flex>
-          <Flex justify="space-between" gap={10}>
-            <Button size="large" block>
-              Save
-            </Button>
-            <Button size="large" block type="primary" border>
-              Pay
-            </Button>
-          </Flex>
-        </Card>
-      </Flex>
+      <Card style={{ background: "#eee", marginTop: "25%" }} bordered>
+        <Flex justify="space-between">
+          <Text strong>Sub Total</Text>
+          <Text strong>${getSubTotalPrice()}</Text>
+        </Flex>
+        <Flex justify="space-between" style={{ marginTop: 5 }}>
+          <Text strong>Discount</Text>
+          <Select value={discount} onChange={setDiscount}>
+            <Select.Option value="0">NA</Select.Option>
+            <Select.Option value="15">15%</Select.Option>
+          </Select>
+        </Flex>
+        <Divider />
+        <Flex justify="space-between" style={{ margin: "20px 0" }}>
+          <b>Total Payment</b>
+          <b>
+            $
+            {discount !== "0"
+              ? (getSubTotalPrice() - (discount / 100) * getSubTotalPrice()).toFixed(2)
+              : getSubTotalPrice()}
+          </b>
+        </Flex>
+        <Flex justify="space-between" gap={10}>
+          <Button size="large" block>
+            Save
+          </Button>
+          <Button size="large" block type="primary">
+            Pay
+          </Button>
+        </Flex>
+      </Card>
     </Card>
   );
 };

@@ -58,3 +58,33 @@ img {
   width: 0px !important;
   height: 0px !important;
 }
+
+.demo-logo-vertical {
+  width: 100%;
+  text-align: center !important;
+}
+
+.ant-layout-header,
+.ant-layout-sider-children,
+.ant-btn-icon {
+  background-color: #ffff !important;
+  color: #282c34 !important;
+}
+
+.ant-layout-sider-trigger {
+  background-color: #eeee !important;
+  color: #282c34 !important;
+}
+
+.ant-layout-header,
+.ant-layout-sider-children {
+  border-right: 1px solid #eee;
+}
+
+.ant-menu {
+  border-inline-end: none !important;
+}
+
+.ant-layout-header ul{
+  background-color: #fff;
+}
