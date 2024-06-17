@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   ShoppingCartOutlined,
   LayoutOutlined,
@@ -26,6 +26,9 @@ const MainLayout = () => {
     }
     return <ShoppingCartOutlined style={{ fontSize: 20 }} />;
   };
+  const returnActiveMenu = () => {
+    return window.location.href.split("/")[3];
+  };
 
   const navigate = useNavigate();
   return (
@@ -48,7 +51,7 @@ const MainLayout = () => {
         </div>
         <Menu
           mode="inline"
-          defaultSelectedKeys={["2"]}
+          defaultSelectedKeys={[returnActiveMenu()]}
           items={[
             // {
             //   key: "1",
@@ -57,19 +60,19 @@ const MainLayout = () => {
             //   onClick: () => navigate("/")
             // },
             {
-              key: "2",
+              key: "orders",
               icon: <LayoutOutlined />,
               label: "Orders",
               onClick: () => navigate("/orders")
             },
             {
-              key: "3",
+              key: "customers",
               icon: <TeamOutlined />,
               label: "Customers",
               onClick: () => navigate("/customers")
             },
             {
-              key: "4",
+              key: "products",
               icon: <InboxOutlined />,
               label: "Product",
               children: [
@@ -91,7 +94,7 @@ const MainLayout = () => {
               ]
             },
             {
-              key: "5",
+              key: "reports",
               icon: <BarChartOutlined />,
               label: "Reports",
               children: [
@@ -137,22 +140,22 @@ const MainLayout = () => {
             justifyContent: "space-between"
           }}
         >
-          <div style={{ width: collapsed ? "88.5%" : "87.2%" }}></div>
+          <div style={{ width: collapsed ? "94.7%" : "94.1%" }}></div>
           <Menu
             mode="horizontal"
-            defaultSelectedKeys={["2"]}
+            defaultSelectedKeys={[returnActiveMenu()]}
             items={[
               {
-                key: "1",
+                key: "saved-cart",
                 icon: renderNotification(),
                 // label: "Dashboard"
                 onClick: () => navigate("/saved-cart")
-              },
-              {
-                key: "2",
-                // icon: < />,
-                label: "Profile"
               }
+              // {
+              //   key: "",
+              //   // icon: < />,
+              //   label: "Profile"
+              // }
             ]}
             style={{
               flex: 1,
