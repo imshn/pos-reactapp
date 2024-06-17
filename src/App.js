@@ -11,6 +11,10 @@ const router = createBrowserRouter([
     errorElement: <h1>404</h1>,
     children: [
       {
+        path: "",
+        element: <h1>Dashboard</h1>
+      },
+      {
         path: "orders",
         element: <OrderSection />,
         children: [
@@ -32,11 +36,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/products",
-        element: <h1>Products</h1>,
         children: [
+          {
+            path: "",
+            element: <h1>Product</h1>
+          },
           {
             path: "add",
             element: <h1>Add Product</h1>
+          },
+          {
+            path: "stock-management",
+            element: <h1>Stock Management</h1>
           }
         ]
       },

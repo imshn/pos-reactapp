@@ -66,6 +66,11 @@ const MainLayout = () => {
                 },
                 {
                   key: "42",
+                  label: "Stock Management",
+                  onClick: () => navigate("/products/stock-management")
+                },
+                {
+                  key: "43",
                   label: "Manage Categories",
                   onClick: () => navigate("/categories")
                 }
