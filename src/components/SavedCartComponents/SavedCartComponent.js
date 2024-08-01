@@ -1,10 +1,27 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ProductContext from "../../context/ProductContextAPI/ProductContext";
-import { Table, Typography } from "antd";
+import { Button, Flex, Table, Typography } from "antd";
+import ConfirmModal from "../CustomModals/ConfirmModal";
 
 const { Title, Text } = Typography;
 const SavedCartComponent = () => {
-  const { saveCartList } = useContext(ProductContext);
+  const { saveCartList, setCart, cart } = useContext(ProductContext);
+  const [retriveConfirmModalOpen, setRetriveConfirmModalOpen] = useState(false);
+  const [id, setId] = useState();
+
+  const retriveSaveCartItem = (id) => {
+    let saveItemFromSaveList;
+    saveCartList?.forEach((saveItem) => {
+      saveItemFromSaveList = saveItem?.item?.find((item) => item.id === id);
+    });
+
+    let index = saveCartList?.item?.indexOf(saveItemFromSaveList);
+    console.log(cart, index, saveItemFromSaveList);
+    // saveCartList?.item?.splice(index, 1);
+    // setCart([...cart, saveItemFromSaveList]);
+    // setRetriveConfirmModalOpen(false);
+  };
+
   const columns = [
     {
       title: "Items",
@@ -28,18 +45,37 @@ const SavedCartComponent = () => {
       render: (text, record) => (
         <strong>${(parseFloat(text) * record.qty).toFixed(2)}</strong>
       )
+    },
+    {
+      title: "Actions",
+      dataIndex: "id",
+      key: "id",
+      render: (text, record) => (
+        <Flex gap={5}>
+          <Button
+            type="primary"
+            onClick={() => {
+              setId(record.id);
+              setRetriveConfirmModalOpen(true);
+            }}
+          >
+            Retrive
+          </Button>
+          <Button type="primary" danger>
+            Delete
+          </Button>
+        </Flex>
+      )
     }
   ];
-  console.log(saveCartList, "saved");
   const dataSource = [];
   const trimSaveCartList = () => {
     saveCartList.forEach((item) => {
       dataSource.push(...item.item);
-      console.log([...item.item], "38");
     });
     return dataSource;
   };
-  //   console.log(dataSource)
+
   return (
     <div>
       <Title>Saved Carts</Title>
@@ -54,6 +90,14 @@ const SavedCartComponent = () => {
         }}
         // scroll={{ y: 250 }}
         responsive
+      />
+      <ConfirmModal
+        isModalOpen={retriveConfirmModalOpen}
+        handleOk={() => retriveSaveCartItem(id)}
+        handleCancel={() =>
+          setRetriveConfirmModalOpen(!retriveConfirmModalOpen)
+        }
+        message={"Are you sure? You want to retrive this item?"}
       />
     </div>
   );

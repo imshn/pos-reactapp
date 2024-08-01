@@ -7,8 +7,13 @@ import MainLayout from "./layout/mainLayout";
 import OrderSection from "./components/OrdersComponents/OrderSection";
 import CustomerList from "./components/CustomerComponents/CustomerList";
 import SavedCartComponent from "./components/SavedCartComponents/SavedCartComponent";
+import LoginPage from "./components/auth/Login";
 
 const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <LoginPage />
+  },  
   {
     path: "/",
     element: <MainLayout />,
